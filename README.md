@@ -4,5 +4,6 @@
 Необходимые библиотеки:
  - `XML`
  - `ggplot2`
+ - `gridExtra`
 
 ![](plot.png)
