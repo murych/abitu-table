@@ -26,24 +26,15 @@ number <- function(html){
 }
 
 graph.create <- function(table, header.num){
-  pic.title <- c('ÃÃ Ã±Ã¯Ã°Ã¥Ã¤Ã¥Ã«Ã¥Ã­Ã¨Ã¥ Ã¯Ã® Ã²Ã¨Ã¯Ã³ Ã¤Ã®ÃªÃ³Ã¬Ã¥Ã­Ã²Ã  Ã¢ ÃŒÃ€Ãˆ Â¹',header.num,'12.03.04')
+  pic.title <- c('Ğàñïğåäåëåíèå ïî òèïó äîêóìåíòà â ÌÀÈ ¹',header.num,'12.03.04')
   pic.title <- paste(pic.title, collapse = ' ')
   
   picture <- ggplot(table, aes(original))+
     geom_bar(col = 'black', aes(fill = original), width=0.5)+
     theme_bw()+
     scale_fill_brewer(palette = "Blues")+
-    labs(title = pic.title, x = 'Ã’Ã¨Ã¯', y = 'ÃŠÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã®')+
+    labs(title = pic.title, x = 'Òèï', y = 'Êîëè÷åñòâî')+
     theme(legend.position='none')
   
   return(picture)
 }
-
-########
-import()
-
-mai.9 <- 'http://techcoockbooknotes.blogspot.com/2015/07/9-120304.html'
-mai.6 <- 'http://techcoockbooknotes.blogspot.com/2015/07/6-120304.html'
-
-grid.arrange(graph.create(table.sort(mai.6), number(mai.6)), 
-             graph.create(table.sort(mai.9),number(mai.9)), ncol=2)
