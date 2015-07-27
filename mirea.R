@@ -27,12 +27,13 @@ table.mirea <- function(url){
 # ggplot(table, aes(summ, fill=original)) + geom_bar(width=0.7) +
 #   facet_wrap(~ prior + hostel)
 # 
-# qplot(factor(prior), data=table, geom="bar", fill=factor(original))
+# qplot(factor(prior), data=table.mirea(url.mirea), geom="bar", fill=factor(original))
 # 
 # qplot(prior, data=table, weight=summ, geom="histogram")
 # 
-# qplot(summ, data = table, geom = "freqpoly")
-# 
+# qplot(summ, data = table.mirea(url.mirea), geom = "freqpoly")
 # 
 # ggplot(table, aes(summ)) + 
 #         geom_freqpoly()
+# 
+# barplot(table.mirea(url.mirea)$summ)
