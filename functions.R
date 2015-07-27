@@ -1,8 +1,10 @@
-mai.9 <- 'http://techcoockbooknotes.blogspot.com/2015/07/9-120304.html'
-mai.6 <- 'http://techcoockbooknotes.blogspot.com/2015/07/6-120304.html'
+import <- function(){
+  library(XML)
+  library(ggplot2)
+  library(gridExtra)
+}
 
-
-table.mai <- function(html){
+table.sort <- function(html){
   column.names <-  c('number','id','name','dob','original','prior')
   
   table.mai <- readHTMLTable(html, header = T, which = 1)
