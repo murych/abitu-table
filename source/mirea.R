@@ -2,7 +2,7 @@ url <- 'http://www.priem.mirea.ru/rating-2015/names_rating.php?competition=15033
 
 
 get.table <- function(url){
-  column.names <-  c('number','name','prior','original','hostel','marks', 'achieve', 'summ', 'comment')
+  column.names <-  c('number','name','prior','original','hostel','marks', 'achieve', 'summ', 'notes')
   
   table <- readHTMLTable(url, header = F, which = 1)
   table <- table[-1,]
