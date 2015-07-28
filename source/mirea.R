@@ -1,7 +1,7 @@
-url.mirea <- 'http://www.priem.mirea.ru/rating-2015/names_rating.php?competition=1503310360525937974&prior=any&documentType=any'
+url <- 'http://www.priem.mirea.ru/rating-2015/names_rating.php?competition=1503310360525937974&prior=any&documentType=any'
 
 
-table.mirea <- function(url){
+get.table <- function(url){
   column.names <-  c('number','name','prior','original','hostel','marks', 'achieve', 'summ', 'comment')
   
   table <- readHTMLTable(url, header = F, which = 1)
