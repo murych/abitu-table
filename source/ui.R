@@ -5,12 +5,12 @@ init.ui <- function(){
            '1' <- source('mirea.R'),
            '2' <- source('mai.6.R'),
            '3' <- source('mai.9.R'),
-           '4' <- source('miet.R'))
+           '4' <- source('mpei.R'))
 #     switch(gtkComboBoxGetActive(combobox.uni),
 #            '1' <- print('mirea.R'),
 #            '2' <- print('mai.6.R'),
 #            '3' <- print('mai.9.R'),
-#            '4' <- print('miet.R'))
+#            '4' <- print('mpei.R'))
   }
   
   button.action <- function(button){

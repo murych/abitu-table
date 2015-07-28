@@ -1,4 +1,5 @@
-import <- function(){
+initializing <- function(){
+  Sys.setlocale("LC_CTYPE", "Russian")
   library(XML)
   library(RGtk2)
   library(cairoDevice)
@@ -9,7 +10,7 @@ import <- function(){
 
 source('ui.R')
 
-import()
+initializing()
 
 init.ui()
 

@@ -8,32 +8,17 @@ get.table <- function(url){
   table <- table[-1,]
   colnames(table) <- column.names
   
-  table$number <- as.numeric(as.vector(table$number))
-  table$name <- as.character(as.vector(table$name))
-  table$prior <- factor(table$prior)
-  table$original <- factor(table$original)
-  table$hostel <- factor(table$hostel)
-  table$marks <- as.character(as.vector(table$marks))
-  table$achieve <- factor(table$achieve)
-  table$summ <- as.numeric(as.vector(table$summ))
-  table$comment <- factor(table$comment)
+  for (i in c(1,3,7,8)){
+    table[,i] <- as.numeric(as.vector(table[,i]))
+  }
+  
+  for (i in c(2,4,5,6,9)){
+    table[,i] <- as.character(as.vector(table[,i]))
+  }
+  
+  for (i in c(3,4,5)){
+    table[,i] <- factor(table[,i])
+  }
   
   return(table)
 }
-
-
-
-
-# ggplot(table, aes(summ, fill=original)) + geom_bar(width=0.7) +
-#   facet_wrap(~ prior + hostel)
-# 
-# qplot(factor(prior), data=table.mirea(url.mirea), geom="bar", fill=factor(original))
-# 
-# qplot(prior, data=table, weight=summ, geom="histogram")
-# 
-# qplot(summ, data = table.mirea(url.mirea), geom = "freqpoly")
-# 
-# ggplot(table, aes(summ)) + 
-#         geom_freqpoly()
-# 
-# barplot(table.mirea(url.mirea)$summ)
