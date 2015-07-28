@@ -5,5 +5,7 @@
  - `XML`
  - `ggplot2`
  - `gridExtra`
+ - `RGtk2`
+ - `cairoDevice`
 
 ![](plot.png)

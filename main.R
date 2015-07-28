@@ -3,6 +3,7 @@ import <- function(){
   library(RGtk2)
   library(cairoDevice)
   library(ggplot2)
+  library(gridExtra)
 }
 
 
