@@ -6,27 +6,25 @@ init.ui <- function(){
            '2' <- source('mai.6.R'),
            '3' <- source('mai.9.R'),
            '4' <- source('mpei.R'))
-#     switch(gtkComboBoxGetActive(combobox.uni),
-#            '1' <- print('mirea.R'),
-#            '2' <- print('mai.6.R'),
-#            '3' <- print('mai.9.R'),
-#            '4' <- print('mpei.R'))
   }
   
-  button.action <- function(button){
-    get.university()
-    
+  open.new.window <- function(){
+    window.title <- c(university[(gtkComboBoxGetActive(combobox.uni)+1)], special[(gtkComboBoxGetActive(combobox.dep)+1)])
+    window.title <- paste(window.title, collapse = ' ')
     new.window <- gtkWindow()
-    new.window['title'] <- 'Plot'
+    new.window['title'] <- window.title
     
     plotArea <- gtkDrawingArea()
     gtkWidgetSetSizeRequest(plotArea, 400, 400)
     asCairoDevice(plotArea)
     gtkWidgetShow(plotArea)
     new.window$add(plotArea)
+  }
     
+  button.action <- function(button){
+    get.university()
+    open.new.window()
     plot(get.table(url)$summ, type = 'l')
-    # plot(table.mirea(url.mirea)$summ, type = 'l')
     
   }
   
