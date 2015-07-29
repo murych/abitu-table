@@ -5,6 +5,7 @@ initializing <- function(){
   library(cairoDevice)
   library(ggplot2)
   library(gridExtra)
+  library(httr)
 }
 
 

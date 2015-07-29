@@ -1,38 +1,52 @@
-mai.9 <- 'http://techcoockbooknotes.blogspot.com/2015/07/9-120304.html'
-mai.6 <- 'http://techcoockbooknotes.blogspot.com/2015/07/6-120304.html'
+url <- 'http://priem.mai.ru/lists/list_2_o27.php'
 
-
-get.table <- function(html){
-  column.names <-  c('number','id','name','dob','original','prior')
+get.table <- function(url){
+  html <- POST(url, body = list(dep = '6', budjet = 'Б', form = 'О', spec = 'Б-12.03.04', listtype = '1'))
   
-  table.mai <- readHTMLTable(html, header = T, which = 1)
-  colnames(table.mai) <- column.names
-  table.mai$number <- as.numeric(as.vector(table.mai$number))
-  table.mai$id <- as.vector(table.mai$id)
-  table.mai$name <- as.vector(table.mai$name)
-  table.mai$dob <- as.vector(table.mai$dob)
+  html <- content(html)
   
-  return(table.mai)
-}
-
-number <- function(html){
-  header.num <- strsplit(parseURI(html)$path, split = '(/|-)')[[1]]
-  header.num <- tail(header.num, n=2)
-  header.num <- header.num[-2]
+  table <- readHTMLTable(html, header = F, which = 7)
   
-  return(header.num)
-}
-
-graph.create <- function(table, header.num){
-  pic.title <- c('Распределение по типу документа в МАИ №',header.num,'12.03.04')
-  pic.title <- paste(pic.title, collapse = ' ')
+  table <- table[-c(1:11),]
+  table <- table[,-c(2,11)]
   
-  picture <- ggplot(table, aes(original))+
-    geom_bar(col = 'black', aes(fill = original), width=0.5)+
-    theme_bw()+
-    scale_fill_brewer(palette = "Blues")+
-    labs(title = pic.title, x = 'Тип', y = 'Количество')+
-    theme(legend.position='none')
+  column.names <-  c('number','name','summ','rus','math','phys', 'achieve', 'advantage', 'original', 'hostel', 'whithout.hostel')
+  colnames(table) <- column.names
   
-  return(picture)
+  for (i in c(2,3,8:11)){
+    table[,i] <- as.character(as.vector(table[,i]))
+    Encoding(table[,i]) <- 'UTF-8'
+  }
+  
+  for (i in 1:length(table$summ)){
+    table$prior[i] <- tail(strsplit(table$summ[i], split = '*')[[1]],2)[1]
+  }
+  
+  for (i in 1:length(table$summ)){
+    table$summ[i] <- paste(strsplit(table$summ[i], split = '*')[[1]][c(1:3)], collapse = '')
+  }
+  
+  for (i in c(1,3:7,12)){
+    table[,i] <- as.numeric(as.vector(table[,i]))
+  }
+  
+  for (i in c(8:12)){
+    table[,i] <- factor(table[,i])
+  }
+  
+  table$achieve[is.na(table$achieve)] <- 0
+  
+  levels(table$advantage)[1] <- 'no'
+  levels(table$advantage)[2] <- 'yes'
+  
+  levels(table$original)[1] <- 'copy'
+  levels(table$original)[2] <- 'original'
+  
+  levels(table$hostel)[1] <- 'no'
+  levels(table$hostel)[2] <- 'yes'
+  
+  levels(table$whithout.hostel)[2] <- 'no'
+  levels(table$whithout.hostel)[3] <- 'yes'
+  
+  return(table)
 }
