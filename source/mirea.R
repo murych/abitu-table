@@ -63,3 +63,16 @@ draw.table <- function(table, window.title){
     }
   }
 }
+
+draw.plot <- function(table, window.title){
+  plot.window <- gtkWindow()
+  plot.window['title'] <- window.title
+  plotArea <- gtkDrawingArea()
+  gtkWidgetSetSizeRequest(plotArea, 410, 400)
+  asCairoDevice(plotArea)
+  gtkWidgetShow(plotArea)
+  plot.window$add(plotArea)
+  Sys.sleep(1)
+  plot(table$original, xlab = 'Тип документа', ylab = 'Количество заявлений')
+  
+}
