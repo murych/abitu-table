@@ -9,19 +9,20 @@ init.ui <- function(){
   }
   
   button.gettable <- function(button){
+    get.university()
     window.title <- c(university[(gtkComboBoxGetActive(combobox.uni)+1)], special[(gtkComboBoxGetActive(combobox.dep)+1)])
     window.title <- paste(window.title, collapse = ' ')
-    table.window <- gtkWindow()
-    table.window['title'] <- window.title
+#     table.window <- gtkWindow()
+#     table.window['title'] <- window.title
+#     
+#     frame <- gtkFrameNew()
+#     table.window$add(frame)
+#     
+#     vbox <- gtkVBoxNew()
+#     vbox$setBorderWidth(30)
+#     frame$add(vbox)
     
-    frame <- gtkFrameNew()
-    table.window$add(frame)
-    
-    vbox <- gtkVBoxNew()
-    vbox$setBorderWidth(30)
-    frame$add(vbox)
-    
-    draw.table(get.table(url),vbox)
+    draw.table(get.table(url),window.title)
   }
     
   button.getplot <- function(button){

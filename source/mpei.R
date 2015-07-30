@@ -28,22 +28,22 @@ get.table <- function(url){
   return(table)
 }
 
-draw.table <- function(table, vbox){
+draw.table <- function(table, window.title){
   res <- subset(table, subset = (original == 'оригинал' | name == 'Майзенберг Тимур Леонидович'), select = c(summ, math, phys, rus, achieve, name, hostel, original))
   
   for (i in 1:length(res[,1])){
     res$number[i] <- i
   }
   
-  # window <- gtkWindow()
-  # window['title'] <- 'Get results'
-  # 
-  # frame <- gtkFrameNew()
-  # window$add(frame)
-  # 
-  # vbox <- gtkVBoxNew()
-  # vbox$setBorderWidth(30)
-  # frame$add(vbox)
+  window <- gtkWindow()
+  window['title'] <- window.title
+  
+  frame <- gtkFrameNew()
+  window$add(frame)
+  
+  vbox <- gtkVBoxNew()
+  vbox$setBorderWidth(30)
+  frame$add(vbox)
   
   tableRes <- gtkTableNew(nrow(res)+1,ncol(res)+1)
   tableRes$setColSpacings(10)
