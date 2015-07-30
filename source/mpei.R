@@ -64,3 +64,19 @@ draw.table <- function(table, window.title){
     }
   }
 }
+
+draw.plot <- function(table, window.title){
+  table <- subset(table, original == levels(table$original)[2] | original == levels(table$original)[3])
+  table$original <- factor(table$original)
+  
+  plot.window <- gtkWindow()
+  plot.window['title'] <- window.title
+  plotArea <- gtkDrawingArea()
+  gtkWidgetSetSizeRequest(plotArea, 400, 400)
+  asCairoDevice(plotArea)
+  gtkWidgetShow(plotArea)
+  plot.window$add(plotArea)
+  Sys.sleep(1)
+  plot(table$original, xlab = 'Тип документа', ylab = 'Количество заявлений')
+
+}

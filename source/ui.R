@@ -19,15 +19,7 @@ init.ui <- function(){
     get.university()
     window.title <- c(university[(gtkComboBoxGetActive(combobox.uni)+1)], special[(gtkComboBoxGetActive(combobox.dep)+1)])
     window.title <- paste(window.title, collapse = ' ')
-    plot.window <- gtkWindow()
-    plot.window['title'] <- window.title
-    plotArea <- gtkDrawingArea()
-    gtkWidgetSetSizeRequest(plotArea, 400, 400)
-    asCairoDevice(plotArea)
-    gtkWidgetShow(plotArea)
-    plot.window$add(plotArea)
-    
-    plot(get.table(url)$summ, type = 'l')
+    draw.plot(get.table(url),window.title)
   }
   
   window <- gtkWindow()
