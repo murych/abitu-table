@@ -27,3 +27,40 @@ get.table <- function(url){
   
   return(table)
 }
+
+draw.table <- function(table, vbox){
+  res <- subset(table, subset = (original == 'оригинал' | name == 'Майзенберг Тимур Леонидович'), select = c(summ, math, phys, rus, achieve, name, hostel, original))
+  
+  for (i in 1:length(res[,1])){
+    res$number[i] <- i
+  }
+  
+  # window <- gtkWindow()
+  # window['title'] <- 'Get results'
+  # 
+  # frame <- gtkFrameNew()
+  # window$add(frame)
+  # 
+  # vbox <- gtkVBoxNew()
+  # vbox$setBorderWidth(30)
+  # frame$add(vbox)
+  
+  tableRes <- gtkTableNew(nrow(res)+1,ncol(res)+1)
+  tableRes$setColSpacings(10)
+  vbox$packStart(tableRes,FALSE,FALSE,0)
+  
+  table.names <- c('Сумма','М','Ф','Р','ИД','ФИО','Общежитие','Тип документа','#')
+  for (indC in 1:ncol(res)) {
+    label <- gtkLabel(table.names[indC])
+    tableRes$attachDefaults(label, indC, indC+1, 0, 1)
+  }
+  
+  for (indR in 1:nrow(res)) {
+    label <- gtkLabel(rownames(res)[indR])
+    tableRes$attachDefaults(label,0,1,indR,indR+1)
+    for (indC in 1:ncol(res)) {
+      label <- gtkLabel(res[indR,indC])
+      tableRes$attachDefaults(label, indC, indC+1, indR, indR+1)
+    }
+  }
+}

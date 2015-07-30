@@ -8,24 +8,35 @@ init.ui <- function(){
            '4' <- source('mpei.R'))
   }
   
-  open.new.window <- function(){
+  button.gettable <- function(button){
     window.title <- c(university[(gtkComboBoxGetActive(combobox.uni)+1)], special[(gtkComboBoxGetActive(combobox.dep)+1)])
     window.title <- paste(window.title, collapse = ' ')
-    new.window <- gtkWindow()
-    new.window['title'] <- window.title
+    table.window <- gtkWindow()
+    table.window['title'] <- window.title
     
+    frame <- gtkFrameNew()
+    table.window$add(frame)
+    
+    vbox <- gtkVBoxNew()
+    vbox$setBorderWidth(30)
+    frame$add(vbox)
+    
+    draw.table(get.table(url),vbox)
+  }
+    
+  button.getplot <- function(button){
+    get.university()
+    window.title <- c(university[(gtkComboBoxGetActive(combobox.uni)+1)], special[(gtkComboBoxGetActive(combobox.dep)+1)])
+    window.title <- paste(window.title, collapse = ' ')
+    plot.window <- gtkWindow()
+    plot.window['title'] <- window.title
     plotArea <- gtkDrawingArea()
     gtkWidgetSetSizeRequest(plotArea, 400, 400)
     asCairoDevice(plotArea)
     gtkWidgetShow(plotArea)
-    new.window$add(plotArea)
-  }
+    plot.window$add(plotArea)
     
-  button.action <- function(button){
-    get.university()
-    open.new.window()
     plot(get.table(url)$summ, type = 'l')
-    
   }
   
   window <- gtkWindow()
@@ -59,7 +70,11 @@ init.ui <- function(){
   box1$packStart(combobox.dep)
 
   
-  GetResult <- gtkButton('Get Plot')
-  gSignalConnect(GetResult, "clicked", button.action)
-  box1$packStart(GetResult, fill = F)
+  GetPlot <- gtkButton('Get Plot')
+  gSignalConnect(GetPlot, "clicked", button.getplot)
+  box1$packStart(GetPlot, fill = F)
+  
+  GetTable <- gtkButton('Get Table')
+  gSignalConnect(GetTable, 'clicked', button.gettable)
+  box1$packStart(GetTable, fill = F)
 }
