@@ -1,6 +1,5 @@
-initializing <- function(){
+initializing <- function() {
   Sys.setlocale("LC_CTYPE", "Russian")
-  # par(mar=c(1,1,1,1))
   library(XML)
   library(RGtk2)
   library(cairoDevice)
@@ -10,7 +9,7 @@ initializing <- function(){
 }
 
 
-source('ui.R')
+source("source/ui.R")
 
 initializing()
 
