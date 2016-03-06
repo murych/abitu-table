@@ -1,4 +1,4 @@
-url <- 'http://www.priem.mirea.ru/rating-2015/names_rating.php?competition=1503310360525937974&prior=any&documentType=any'
+url <- 'http://www.priem.mirea.ru/rating-2015/names_rating.php?competition=1503310006720666934'
 
 
 get.table <- function(url){
@@ -24,7 +24,7 @@ get.table <- function(url){
 }
 
 draw.table <- function(table, window.title){
-  res <- subset(table, subset = (original == 'ïîäëèííèê' | name == 'Ìàéçåíáåğã Òèìóğ Ëåîíèäîâè÷'), select = c(summ, marks, achieve, name, hostel, original))
+  res <- subset(table, subset = (original == 'Ğ¿Ğ¾Ğ´Ğ»Ğ¸Ğ½Ğ½Ğ¸Ğº' | name == 'ĞœĞ°Ğ¹Ğ·ĞµĞ½Ğ±ĞµÑ€Ğ³ Ğ¢Ğ¸Ğ¼ÑƒÑ€ Ğ›ĞµĞ¾Ğ½Ğ¸Ğ´Ğ¾Ğ²Ğ¸Ñ‡'), select = c(summ, marks, achieve, name, hostel, original))
   
   for (i in 1:length(res[,1])){
     res$number[i] <- i
@@ -47,7 +47,7 @@ draw.table <- function(table, window.title){
   tableRes$setColSpacings(10)
   vbox$packStart(tableRes,FALSE,FALSE,0)
   
-  table.names <- c('Ñóììà','Áàëëû','ÈÄ','ÔÈÎ','Îáùåæèòèå','Òèï äîêóìåíòà','#')
+  table.names <- c('?????','?????','??','???','?????????','??? ?????????','#')
   
   for (indC in 1:ncol(res)) {
     label <- gtkLabel(table.names[indC])
@@ -73,6 +73,6 @@ draw.plot <- function(table, window.title){
   gtkWidgetShow(plotArea)
   plot.window$add(plotArea)
   Sys.sleep(1)
-  plot(table$original, xlab = 'Òèï äîêóìåíòà', ylab = 'Êîëè÷åñòâî çàÿâëåíèé')
+  plot(table$original, xlab = '??? ?????????', ylab = '?????????? ?????????')
   
 }

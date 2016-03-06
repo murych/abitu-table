@@ -1,9 +1,12 @@
-url <- 'http://www.pkmpei.ru/inform/list18e.html'
+# url <- 'http://www.pkmpei.ru/inform/list18e.html' # 12.03.04
+# url <- 'http://www.pkmpei.ru/inform/list21e.html' # 11.03.04
+url <- 'http://www.pkmpei.ru/inform/list19e.html' # 11.03.01
 
 
 get.table <- function(url){
   column.names <-  c('summ','math','phys','rus','achieve','name', 'dob', 'hostel', 'original','notes')
   
+  # table <- readHTMLTable(url, header = F, which = 5)
   table <- readHTMLTable(url, header = F, which = 4)
   table <- table[-c(1,2),]
   colnames(table) <- column.names
